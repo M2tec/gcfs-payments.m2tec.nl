@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YPX0E5PNY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-8YPX0E5PNY');
+  </script>
+
+  <title>M2tec payments with Gamechanger</title>
+  <script src="https://cdn.jsdelivr.net/npm/easyqrcodejs@4.4.13/dist/easy.qrcode.min.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div class="flex-container">
+
+    <div class="box">
+
+      <div class="columnLeft">
+        <div class="qrwrap">
+          <div title="this is the code" id="qrcode">
+          </div>
+        </div>
+
+        <div class="linkRow">
+          <a id="dappLink" target="_blank">GC dApp link</a>
+          <a id="tweetButton"></a>
+        </div>
+
+      </div>
+
+      <div class="columnRight">
+      <input type="text" id="amountInput" class="amountInput" placeholder="Enter amount in Ada" onchange="main()"/>
+
+
+        <h2 class="walletHeading">GCFS NFT</h2>
+        <textarea rows="3" class="textarea" onchange="main()"
+          id="walletInput">gcfs://672825680c69dc1c6018200f219e87e0ac04896b343d07fd74b44145.Paypad@latest://pay.gcscript</textarea>
+
+        <div class="togglesBox">
+          <div class="toggles" id="network_types" data-network_type="preprod" onchange="main()">
+            <input type="radio" id="network_mainnet" name="network_type" value="mainnet">
+            <label for="network_mainnet">Mainnet</label>
+
+            <input type="radio" id="network_preprod" name="network_type" value="preprod">
+            <label for="network_preprod">Preprod</label>
+          </div>
+
+        </div>
+
+
+        <div class="buttonBox">
+        <button class="button" id="connectBtn" onclick="location.href='http://www.m2tec.nl'">Pay</button>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="index.js"></script>
+
+</body>
+
+</html>

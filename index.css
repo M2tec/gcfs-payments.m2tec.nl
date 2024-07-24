@@ -1,0 +1,239 @@
+:root {
+    --background-color: #f0eeee;
+    --font-color: #555;
+    --line-color: #bfbfbf;
+    --button-background-color: #e2e2e2;
+    --button-color: #002d88;
+}
+
+body {
+  background-image: linear-gradient(to left top, #30b7ff, #32a3ea, #338ed6, #337bc0, #3268ab, #2360ae, #1657b0, #0e4eb1, #0049c9, #1841de, #3e31f1, #6300ff);
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  color:rgb(255, 255, 255);
+  margin:0px;
+}
+
+h1 {
+  display: flex;
+  font-size: 40px;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  margin-top:5px;
+  margin-bottom: 20px;
+}
+
+/* Solid border */
+hr.solid {
+  border: 1px solid #ffffff66;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.box {
+  display: flex;
+  overflow: hidden;
+
+  background: rgb(51, 47, 57);
+  margin:30px;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 30px;
+  border-color: black;
+  box-shadow:
+  2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+  6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+  12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+  22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+  41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+  100px 100px 80px rgba(0, 0, 0, 0.07)
+;
+}
+
+.logo {
+  height:100px;
+  position: absolute;
+  margin: 20px;
+}
+
+.donation {
+  margin-top:80px;
+}
+
+input[type=text] {
+  width: auto;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: thin solid #000000; 
+  background-color: rgb(30, 30, 30);
+  color:rgb(255, 255, 255);
+  font-size: large;
+  font-weight: bold;
+}
+
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: thin solid #000000; 
+  background-color: rgb(30, 30, 30);
+  color:rgb(255, 255, 255);
+  font-size: large;
+  font-weight: bold;
+  resize: none;
+}
+
+.buttonBox {
+  flex:2;
+  display: flex;
+  align-items: flex-end;
+}
+
+.button {
+  background-color: #002d88;
+  color: white;
+  border: 2px solid white; 
+  width: 100%;
+  height: 70px;
+  font-size: 25px;
+  font-weight: bold;
+  border-width: thin;
+  border-radius: 10px;
+  cursor:pointer;
+}
+
+.button:hover {
+  background-color: #0f1015; /* Green */
+  color: white;
+}
+
+.columnLeft {
+  background-color: white;
+
+}
+
+.columnRight {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 30px;
+  width: 400px;
+
+}
+
+.qrwrap {
+   display: flex;
+   justify-content: center;
+   padding: 30px;
+   background-color: white;
+
+}
+
+.walletHeading{
+  margin-top: 20px;
+  margin-bottom:0px;
+}
+
+a {
+color: white;
+font-size: 20px;
+} 
+
+
+.flex-container {
+  display: flex;
+  justify-content:center;
+  width: 100%;
+}
+
+.linkRow {
+  display: flex;
+  justify-content:left;
+  align-items: top;
+  gap:15px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  width: 100%;
+  height: 28px;
+}
+
+#dappLink {
+  font-size: 12px;
+  padding: 7px 14px;
+  border-radius: 22px;
+  background-color: #0f1015;
+  text-decoration: none;
+  font-weight: bold;
+  visibility: hidden;
+}
+
+.expand {
+  width: 100%;
+}
+
+
+.togglesBox {
+  display: flex;
+  gap: 20px;
+}
+
+.amountInput {
+  width: 100px;
+  text-align: right;
+}
+
+.denomination {
+  width: 70px; 
+  display:flex; 
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+}
+
+.codepen {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
+.toggles {
+    width: fit-content;
+    border: solid 1px black;
+    padding:5px;
+    background-color: rgb(30, 30, 30);
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+.toggles input { display: none; }
+.toggles label {
+    display: flex;
+    background: rgb(30, 30, 30);;
+    padding: 8px 10px;
+    font-family: sans-serif;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.toggles label:last-of-type { border-right: 0; }
+.toggles label:hover {
+    background: var(--background-color);
+}
+
+.toggles input:checked + label {
+    color: white;
+    background: var(--button-color);
+}
+
+.toggles img {
+    height: 30px;
+}
