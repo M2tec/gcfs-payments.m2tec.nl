@@ -4,8 +4,8 @@ localStorage.clear()
 
 var qrcode = new QRCode(document.getElementById("qrcode"), {
     text: "http://www.gamechanger.finance",
-    width: 550,
-    height: 550
+    // width: 550,
+    // height: 550
 });
 
 let amountInput = document.getElementById('amountInput');
@@ -16,6 +16,10 @@ radioButton = document.getElementById("network_preprod");
 radioButton.checked = true;
 
 dAppLink = document.getElementById('dappLink');
+
+
+let qrCodeElement = document.getElementById("qrcode")
+
 
 ////////////////
 ////    Dapp Logic    /////
@@ -115,10 +119,14 @@ async function main() {
                 }
             );
 
+            const qrWidth = parseInt(getComputedStyle(qrCodeElement).width.slice(0,-2)) - 50 ;
+            console.log(qrWidth)
+            const qrHeight = qrWidth
+
             var options = {
                 text: actionUrl,
-                width: 550,
-                height: 550
+                width: qrWidth ,
+                height: qrHeight
             };
             new QRCode(document.getElementById("qrcode"), options);
 
@@ -376,3 +384,12 @@ function gcDecoder(msg, codec) {
 window.onload = function () {
     main();
 }
+
+window.addEventListener('resize', function(event) {
+    clearTimeout(window.resizedFinished);
+    window.resizedFinished = setTimeout(function(){
+        console.log('Resized finished.');
+        main()
+    }, 250);
+
+}, true);
