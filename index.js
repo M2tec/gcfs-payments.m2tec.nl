@@ -67,6 +67,12 @@ async function main() {
             txSuccessAlert.style.display = "block"
         }
 
+        if (param[0] == "txHash") {
+            console.log(param[1])
+            let txHash = param[1]
+            txAlertText.innerHTML = 'Transaction successfull. Check you transaction on <a href="https://' + network_type + '.cardanoscan.io/transaction/' + txHash + '" class="alert-link">cardanoscan</a>'
+            txSuccessAlert.style.display = "block"
+        }
 
       }
       
