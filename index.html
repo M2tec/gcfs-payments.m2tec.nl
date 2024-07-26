@@ -26,7 +26,7 @@
 
     <div class="row equal">
 
-      <div class="col-12 col-lg-8 bg-light rounded-start-4">
+      <div class="col-12 col-lg-8 bg-light rounded-start-lg-4">
 
         <div class="mt-4" id="qrcode">
         </div>
@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="col-12 col-lg-4 bg-dark rounded-end-4">
+      <div class="col-12 col-lg-4 bg-dark rounded-end-lg-4">
 
         <form class="m-4">
           <div class="mb-3">
@@ -45,32 +45,32 @@
               onchange="main()" />
           </div>
 
-          <div class="mb-3"> 
-          <textarea rows="5" class="form-control" onchange="main()" placeholder="Enter transaction information eg. 
+          <div class="mb-3">
+            <textarea rows="5" class="form-control" onchange="main()" placeholder="Enter transaction information eg. 
 Invoice-No: 1234567890,
 Customer-No: 555-1234,
-VAT: 20,24 ADA"   id="txInfo"></textarea>
+VAT: 20,24 ADA" id="txInfo"></textarea>
           </div>
 
           <div class="h5">Receiver wallet</div>
           <div class="mb-3">
             <textarea rows="5" class="form-control" onchange="main()"
-              id="walletInput">addr_test1qz759fg46yvp28wrcmnxn87xq30yj6c8mh7y40zjnrg9h546h0qr3avqde9mumdaf4gykrtjz58l30g7mpy3r8nxku7q3dtrlt</textarea>
+              id="walletInput">addr_test1qzdwmtak0f8snwwwkqp7dmmfqgnyn2vfvzyuyv2p4r86n34dqwj2u3djrag0mene2cm9elu5mdqmcz9zc2rzgq7c5g6qalxdw2</textarea>
           </div>
 
           <div class="toggles mb-5" id="network_types" data-network_type="preprod" onchange="main()">
-            <input type="radio" class="btn-check" name="network_type" id="network_mainnet" autocomplete="off">
-            <label class="btn btn-secondary" for="network_mainnet">Mainnet</label>
+            <input type="radio" class="btn-check" id="network_mainnet" name="network_type" value="mainnet">
+            <label class="btn btn-secondary me-2" for="network_mainnet">Mainnet</label>
 
-            <input type="radio" class="btn-check" name="network_type" id="network_preprod" autocomplete="off" checked>
+            <input type="radio" class="btn-check" id="network_preprod" name="network_type" value="preprod">
             <label class="btn btn-secondary" for="network_preprod">Preprod</label>
           </div>
 
           <div class="d-grid gap-2">
-          <button type="submit" id="connectBtn" onclick="location.href='http://www.m2tec.nl'"
-            class="btn btn-primary btn-lg fw-bold border-light shadow "><strong>Pay</strong></button>
+            <button type="submit" id="connectBtn" onclick="location.href='http://www.m2tec.nl'"
+              class="btn btn-primary btn-lg fw-bold border-light shadow "><strong>Pay</strong></button>
           </div>
-        
+
         </form>
 
       </div>
