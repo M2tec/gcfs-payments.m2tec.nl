@@ -2,24 +2,33 @@ let handleSetEncoder;
 
 localStorage.clear()
 
+
+let qrCodeElement = document.getElementById("qrcode")
+
+const qrWidth = parseInt(getComputedStyle(qrCodeElement).width.slice(0,-2)) - 50 ;
+console.log(qrWidth)
+const qrHeight = qrWidth
+
 var qrcode = new QRCode(document.getElementById("qrcode"), {
     text: "http://www.gamechanger.finance",
-    // width: 550,
-    // height: 550
+    width: qrWidth ,
+    height: qrHeight
 });
 
 let amountInput = document.getElementById('amountInput');
+let amountAlert = document.getElementById('amountAlert');
 let txInfoInput = document.getElementById('txInfo');
 let walletAddressInput = document.getElementById('walletInput');
+
+let connectForm = document.getElementById("dappConnectorBox");
+let actionBtn = document.getElementById("connectBtn");
+let resultsBox = document.getElementById("resultBox");
+let encodersBox = document.getElementById("encodersBox");
 
 radioButton = document.getElementById("network_preprod");
 radioButton.checked = true;
 
 dAppLink = document.getElementById('dappLink');
-
-
-let qrCodeElement = document.getElementById("qrcode")
-
 
 ////////////////
 ////    Dapp Logic    /////
@@ -32,8 +41,20 @@ async function main() {
     let useCodec = 'gzip';
 
     amount = parseFloat(amountInput.value) * 1000000;
-    txInfo = txInfoInput.value;
 
+    console.log(amount)
+
+    if (isNaN(amount)) {
+        console.log("not a number")
+        amountAlert.style.display = "block"
+        actionBtn.classList.add("disabled");
+        return
+    } else {
+        amountAlert.style.display = "none"
+        actionBtn.classList.remove("disabled");
+    }
+
+    txInfo = txInfoInput.value;
     walletAddress = walletAddressInput.value;
 
     //GameChanger Wallet is pure Web3, zero backend procesing of user data. 
@@ -48,14 +69,10 @@ async function main() {
         var gcApiUrl = "https://beta-preprod-wallet.gamechanger.finance/api/2/run/";
     }
 
-    const currentUrl = window.location.href;
+    let currentUrl = window.location.href;
 
     //UI components:
-    const connectForm = document.getElementById("dappConnectorBox");
-    const actionBtn = document.getElementById("connectBtn");
-    // const errorsBox = document.getElementById("errorBox");
-    const resultsBox = document.getElementById("resultBox");
-    const encodersBox = document.getElementById("encodersBox");
+
 
 
     async function updateUI() {
@@ -68,7 +85,7 @@ async function main() {
 
         //lets try to capture the execution results by decoding/decompressing the return URL
         try {
-            const resultRaw = (new URL(currentUrl)).searchParams.get("result");
+            let resultRaw = (new URL(currentUrl)).searchParams.get("result");
             if (resultRaw) {
                 resultObj = await gcDecoder(resultRaw);
                 //avoids current url carrying latest results all the time 
@@ -123,9 +140,9 @@ async function main() {
                 }
             );
 
-            const qrWidth = parseInt(getComputedStyle(qrCodeElement).width.slice(0,-2)) - 50 ;
+            let qrWidth = parseInt(getComputedStyle(qrCodeElement).width.slice(0,-2)) - 50 ;
             console.log(qrWidth)
-            const qrHeight = qrWidth
+            let qrHeight = qrWidth
 
             var options = {
                 text: actionUrl,
@@ -199,7 +216,7 @@ async function main() {
         //This is a patch to adapt the return URL of the script to the origin that is hosting this html file.
         //so this way executed scripts data exports can be captured back on dapp side
         gcscript.returnURLPattern = window.location.origin + window.location.pathname;
-        const encoded = await gcEncoder(gcscript, useCodec);
+        let encoded = await gcEncoder(gcscript, useCodec);
         return `${gcApiUrl}${encoded}`;
     }
 
