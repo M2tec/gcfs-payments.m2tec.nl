@@ -10,7 +10,7 @@ var qrcode = new QRCode(document.getElementById("qrcode"), {
 
 let amountInput = document.getElementById('amountInput');
 //let txInfo = document.getElementById('txInfo').value;
-let gcfsAddressInput = document.getElementById('walletInput');
+let walletAddressInput = document.getElementById('walletInput');
 
 radioButton = document.getElementById("network_preprod");
 radioButton.checked = true;
@@ -34,7 +34,7 @@ async function main() {
 
     amount = parseInt(amountInput.value) * 1000000;
 
-    gcfsAddress = gcfsAddressInput.value;
+    walletAddress = walletAddressInput.value;
 
     //GameChanger Wallet is pure Web3, zero backend procesing of user data. 
     //Dapp connector links are fully processed on end-user browsers.
@@ -151,102 +151,27 @@ async function main() {
 
         // console.log("buildActionUrl: " + args)
 
-        gcfsAddress = "gcfs://672825680c69dc1c6018200f219e87e0ac04896b343d07fd74b44145.Paypad@latest://pay.gcscript"
+        
 
-        let gcscript = {
+        let gcscript = 
+        {
             "title": "Payment",
-            "description": "payments.m2tec.nl",
+            "description": "Review and sign",
             "type": "script",
-            "run": [{
-                "type": "importAsScript",
-                "args": {
-                    "ada": amount.toString()
-                },
-                "from": [ gcfsAddress ]
-            }]
+            "run": {
+                "importedScript": {
+                    "type": "importAsScript",
+                    "args": {
+                        "address": walletAddress ,
+                        "amount": amount.toString(),
+                        "url":"https://payments.m2tec.nl/",
+                    },
+                    "from": [
+                        "gcfs://386bec6c6199a40890abd7604b60bf43089d9fb1120a3d42198946b9.Pay@latest://pay.gcscript"
+                    ]
+                }
+            }
         }
-
-
-        // GCFS setup code 
-        // {
-        //     "type": "script",
-        //     "title": "Build Transaction",
-        //     "description": "Code that generates a transaction",
-        //     "exportAs": "data",
-        //     "args": "{get('args')}",
-        //     "run": {
-        //         "build": {
-        //             "type": "buildTx",
-        //             "title": "Payment",
-        //             "tx": {
-        //                 "outputs": {
-        //                     "merchant": {
-        //                         "address": "addr_test1qz55eyt5v523xkz8pvjnjdf67ht435hv8mzyueuujaadhc9k6c2pncxfcd80uraszphd5p3x5wj627q8yt74ytfrpafsm902s0",
-        //                         "assets": [
-        //                             {
-        //                                 "policyId": "ada",
-        //                                 "assetName": "ada",
-        //                                 "quantity": "{get('args.ada')}"
-        //                             }
-        //                         ]
-        //                     }
-        //                 }
-        //             }
-        //         },
-        //         "sign": {
-        //             "detailedPermissions": false,
-        //             "type": "signTxs",
-        //             "txs": [
-        //                 "{get('cache.build.txHex')}"
-        //             ]
-        //         },
-        //         "submit": {
-        //             "type": "submitTxs",
-        //             "txs": "{get('cache.sign')}"
-        //         }
-        //     }
-        // }
-
-
-        // let gcscript_1 = {
-        //     "type": "script",
-        //     "title": "M2tec payment",
-        //     "description": "M2 tx",
-        //     "run": {
-        //         "s1": {
-        //             "type": "buildTx",
-        //             "tx": {
-        //                 "outputs": [
-        //                     {
-        //                         "address": walletAddress,
-        //                         "assets": [
-        //                             {
-        //                                 "policyId": "ada",
-        //                                 "assetName": "ada",
-        //                                 "quantity": amount.toString()
-        //                             }
-        //                         ]
-        //                     }
-        //                 ],
-        //                 "auxiliaryData": {
-        //                     "674":
-        //                         { "msg": [txInfo] }
-        //                 },
-        //             }
-        //         },
-        //         "s2": {
-        //             "type": "signTxs",
-        //             "detailedPermissions": false,
-        //             "txs": [
-        //                 "{get('cache.s1.txHex')}"
-        //             ]
-        //         },
-        //         "s3": {
-        //             "type": "submitTxs",
-        //             "txs": "{get('cache.s2')}"
-        //         }
-        //     }
-        // }
 
         //This is a patch to adapt the return URL of the script to the origin that is hosting this html file.
         //so this way executed scripts data exports can be captured back on dapp side
