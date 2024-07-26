@@ -2,18 +2,8 @@ let handleSetEncoder;
 
 localStorage.clear()
 
-
+// Get page elements
 let qrCodeElement = document.getElementById("qrcode")
-
-const qrWidth = parseInt(getComputedStyle(qrCodeElement).width.slice(0,-2)) - 50 ;
-console.log(qrWidth)
-const qrHeight = qrWidth
-
-var qrcode = new QRCode(document.getElementById("qrcode"), {
-    text: "http://www.gamechanger.finance",
-    width: qrWidth ,
-    height: qrHeight
-});
 
 let amountInput = document.getElementById('amountInput');
 let amountAlert = document.getElementById('amountAlert');
@@ -25,10 +15,28 @@ let actionBtn = document.getElementById("connectBtn");
 let resultsBox = document.getElementById("resultBox");
 let encodersBox = document.getElementById("encodersBox");
 
-radioButton = document.getElementById("network_preprod");
+let txAlertText = document.getElementById("txAlertText");
+let txSuccessAlert = document.getElementById("txSuccessAlert");
+
+let radioButton = document.getElementById("network_preprod");
 radioButton.checked = true;
 
-dAppLink = document.getElementById('dappLink');
+let dAppLink = document.getElementById('dappLink');
+
+
+
+const qrWidth = parseInt(getComputedStyle(qrCodeElement).width.slice(0,-2)) - 50 ;
+console.log(qrWidth)
+const qrHeight = qrWidth
+
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+    text: "http://www.gamechanger.finance",
+    width: qrWidth ,
+    height: qrHeight
+});
+
+
+
 
 ////////////////
 ////    Dapp Logic    /////
@@ -40,12 +48,33 @@ async function main() {
     let error = "";
     let useCodec = 'gzip';
 
+
+    let network_type = document.querySelector("input[type='radio'][name=network_type]:checked").value;
+    console.log("Net:" + network_type)
+
+
+    const searchParams = new URLSearchParams(window.location.search);
+
+    for (const param of searchParams) {
+        console.log(param);
+
+        if (param[0] == "result") {
+            console.log(param[1])
+            let decoded = await gcDecoder(param[1], useCodec);
+            let txHash = decoded.exports.data.txHash 
+            console.log(decoded.exports.data.txHash)
+            txAlertText.innerHTML = 'Transaction successfull. Check you transaction on <a href="https://' + network_type + '.cardanoscan.io/transaction/' + txHash + '" class="alert-link">cardanoscan</a>'
+            txSuccessAlert.style.display = "block"
+        }
+
+
+      }
+      
+
+
     amount = parseFloat(amountInput.value) * 1000000;
 
-    console.log(amount)
-
     if (isNaN(amount)) {
-        console.log("not a number")
         amountAlert.style.display = "block"
         actionBtn.classList.add("disabled");
         return
@@ -60,9 +89,6 @@ async function main() {
     //GameChanger Wallet is pure Web3, zero backend procesing of user data. 
     //Dapp connector links are fully processed on end-user browsers.
 
-    let network_type = document.querySelector("input[type='radio'][name=network_type]:checked").value;
-    console.log("Net:" + network_type)
-
     if (network_type == "mainnet") {
         var gcApiUrl = "https://beta-wallet.gamechanger.finance/api/2/run/";
     } else {
@@ -71,10 +97,8 @@ async function main() {
 
     let currentUrl = window.location.href;
 
+
     //UI components:
-
-
-
     async function updateUI() {
         error = "";
         actionUrl = "";
@@ -120,7 +144,7 @@ async function main() {
             
             // actionBtn.setAttribute("onclick", "location.href='" + actionUrl +"'");
             //actionBtn.onclick = "location.href=" + actionUrl;
-            actionBtn.innerHTML = `Payment link`;
+            // actionBtn.innerHTML = `Payment link`;
 
 
             document.getElementById("qrcode").innerHTML = "";
@@ -200,11 +224,11 @@ async function main() {
                 "importedScript": {
                     "type": "importAsScript",
                     "args": {
+                        "title":"M2Tec Payment",
                         "address": walletAddress ,
                         "amount": amount.toString(),
-                        "url": "https://payments.m2tec.nl/",
-                        "msg": txInfo,
-                        "id": "1"                        
+                        "url": "https://payments.m2tec.nl/?txHash={txHash}",
+                        "msg": txInfo                  
                     },
                     "from": [
                         "gcfs://386bec6c6199a40890abd7604b60bf43089d9fb1120a3d42198946b9.Pay@latest://pay.gcscript"
