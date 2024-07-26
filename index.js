@@ -63,14 +63,15 @@ async function main() {
             let decoded = await gcDecoder(param[1], useCodec);
             let txHash = decoded.exports.data.txHash 
             console.log(decoded.exports.data.txHash)
-            txAlertText.innerHTML = 'Transaction successfull. Check you transaction on <a href="https://' + network_type + '.cardanoscan.io/transaction/' + txHash + '" class="alert-link">cardanoscan</a>'
+            // txAlertText.innerHTML = 'Transaction successfull. Check you transaction on <a href="https://' + network_type + '.cardanoscan.io/transaction/' + txHash + '" class="alert-link">cardanoscan</a>'
+            txAlertText.innerHTML = 'Transaction successfull.   TxHash: ' + txHash 
             txSuccessAlert.style.display = "block"
         }
 
         if (param[0] == "txHash") {
             console.log(param[1])
             let txHash = param[1]
-            txAlertText.innerHTML = 'Transaction successfull. Check you transaction on <a href="https://' + network_type + '.cardanoscan.io/transaction/' + txHash + '" class="alert-link">cardanoscan</a>'
+            txAlertText.innerHTML = 'Transaction successfull.   TxHash: ' + txHash 
             txSuccessAlert.style.display = "block"
         }
 
