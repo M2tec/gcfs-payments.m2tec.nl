@@ -9,7 +9,7 @@ var qrcode = new QRCode(document.getElementById("qrcode"), {
 });
 
 let amountInput = document.getElementById('amountInput');
-let txInfoInput = document.getElementById('txInfo').value;
+let txInfoInput = document.getElementById('txInfo');
 let walletAddressInput = document.getElementById('walletInput');
 
 radioButton = document.getElementById("network_preprod");
@@ -31,7 +31,7 @@ async function main() {
     let error = "";
     let useCodec = 'gzip';
 
-    amount = parseInt(amountInput.value) * 1000000;
+    amount = parseFloat(amountInput.value) * 1000000;
     txInfo = txInfoInput.value;
 
     walletAddress = walletAddressInput.value;
@@ -96,8 +96,11 @@ async function main() {
         // }
         if (actionUrl) {
             // errorBox.innerHTML = "";
-            openAction = "window.open('" + actionUrl + "'), '_blank'"
-            actionBtn.setAttribute("onclick", openAction)
+            // openAction = "window.open('" + actionUrl + "'), '_blank'"
+            // actionBtn.setAttribute("onclick", openAction)
+
+            actionBtn.setAttribute("href", actionUrl)
+            
             // actionBtn.setAttribute("onclick", "location.href='" + actionUrl +"'");
             //actionBtn.onclick = "location.href=" + actionUrl;
             actionBtn.innerHTML = `Payment link`;

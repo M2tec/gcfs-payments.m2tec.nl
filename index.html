@@ -41,7 +41,7 @@
 
         <form class="m-4">
           <div class="mb-3">
-            <input type="text" id="amountInput" class="form-control" placeholder="Enter amount in Ada"
+            <input type="number" step=".01" id="amountInput" class="form-control" placeholder="Enter amount in Ada"
               onchange="main()" />
           </div>
 
@@ -67,8 +67,14 @@ VAT: 20,24 ADA" id="txInfo"></textarea>
           </div>
 
           <div class="d-grid gap-2">
-            <button type="submit" id="connectBtn" onclick="location.href='http://www.m2tec.nl'"
-              class="btn btn-primary btn-lg fw-bold border-light shadow "><strong>Pay</strong></button>
+            <a 
+                    id="connectBtn" 
+                    target="_blank" 
+                    href='http://www.m2tec.nl'
+                    onclick="window.open(this.href, 'dapp connection', 'width=400,height=600'); return false;" 
+                    style="text-decoration:none; outline:none;" 
+                    
+              class="btn btn-primary btn-lg fw-bold border-light shadow "><strong>Pay</strong></a>
           </div>
 
         </form>
