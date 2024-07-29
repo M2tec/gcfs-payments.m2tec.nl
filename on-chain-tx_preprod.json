@@ -1,0 +1,89 @@
+{
+    "type": "script",
+    "description": "processing user transaction...",
+    "exportAs": "data",
+    "return": {
+        "mode": "last"
+    },
+    "args": "{get('args')}",
+    "run": {
+        "config": {
+            "type": "macro",
+            "run": {
+                "developerAddress": "addr_test1qz759fg46yvp28wrcmnxn87xq30yj6c8mh7y40zjnrg9h546h0qr3avqde9mumdaf4gykrtjz58l30g7mpy3r8nxku7q3dtrlt",
+                "developerFee": "1000000"
+            }
+        },
+        "build": {
+            "type": "buildTx",
+            "title": "{get('args.title')}",
+            "description": "{get('args.description')}",
+            "id": "{get('args.id')}",
+            "tags": "{get('args.tags')}",
+            "group": "{get('args.grp')}",
+            "indexOf": "{get('args.idx')}",
+            "parentTxHash": "{get('args.parent')}",
+            "returnURLPattern": "{get('args.url')}",
+            "tx": {
+                "outputs": {
+                    "developerFee": {
+                        "address": "{get('cache.config.developerAddress')}",
+                        "assets": [
+                            {
+                                "policyId": "ada",
+                                "assetName": "ada",
+                                "quantity": "{get('cache.config.developerFee')}"
+                            }
+                        ]
+                    },
+                    "userPayment": {
+                        "address": "{get('args.address')}",
+                        "assets": [
+                            {
+                                "policyId": "ada",
+                                "assetName": "ada",
+                                "quantity": "{get('args.amount')}"
+                            }
+                        ]
+                    }
+                },
+                "auxiliaryData": {
+                    "674": {
+                        "msg": "{strToMetadataStr(get('args.msg'))}"
+                    }
+                },
+                "options": {
+                    "autoProvision": {
+                        "workspaceNativeScript": true
+                    },
+                    "autoOptionalSigners": {
+                        "nativeScript": true
+                    }
+                }
+            }
+        },
+        "sign": {
+            "detailedPermissions": false,
+            "type": "signTxs",
+            "txs": [
+                "{get('cache.build.txHex')}"
+            ]
+        },
+        "submit": {
+            "type": "submitTxs",
+            "txs": "{get('cache.sign')}"
+        },
+        "finally": {
+            "type": "macro",
+            "run": {
+                "txHash": "{get('cache.build.txHash')}",
+                "indexMap": "{get('cache.build.indexMap')}",
+                "tags": "{get('args.tags')}",
+                "group": "{get('args.grp')}",
+                "indexOf": "{get('args.idx')}",
+                "parentTxHash": "{get('args.parent')}",
+                "id": "{get('args.id')}"
+            }
+        }
+    }
+}

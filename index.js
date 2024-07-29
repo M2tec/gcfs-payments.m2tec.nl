@@ -238,7 +238,7 @@ async function main() {
                         "msg": txInfo                  
                     },
                     "from": [
-                        "gcfs://386bec6c6199a40890abd7604b60bf43089d9fb1120a3d42198946b9.Pay@latest://pay.gcscript"
+                        "gcfs://386bec6c6199a40890abd7604b60bf43089d9fb1120a3d42198946b9.Lib@latest://pay.gcscript"
                     ]
                 }
             }

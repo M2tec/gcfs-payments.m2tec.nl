@@ -10,7 +10,7 @@
         "config": {
             "type": "macro",
             "run": {
-                "developerAddress": "addr_test1qpfq52v9k60rmytrpdy3zwvtda78ah3kjng6luj273zrkaadqwj2u3djrag0mene2cm9elu5mdqmcz9zc2rzgq7c5g6q0rl88m",
+                "developerAddress": "addr1qx759fg46yvp28wrcmnxn87xq30yj6c8mh7y40zjnrg9h546h0qr3avqde9mumdaf4gykrtjz58l30g7mpy3r8nxku7qjmkrn5",
                 "developerFee": "1000000"
             }
         },
