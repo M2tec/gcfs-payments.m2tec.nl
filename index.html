@@ -18,6 +18,7 @@
   <script src="https://cdn.jsdelivr.net/npm/easyqrcodejs@4.4.13/dist/easy.qrcode.min.js" type="text/javascript"
     charset="utf-8"></script>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script src='https://cdn.jsdelivr.net/npm/@gamechanger-finance/gc/dist/browser.min.js'></script>
   <link rel="stylesheet" href="index.css">
 </head>
 
@@ -37,8 +38,8 @@
 
       <!-- <div class="col-12 col-lg-8 bg-light rounded-start-lg-4"> -->
       <div class="col-12 col-lg-8 bg-light">
-        <div class="mt-4" id="qrcode">
-        </div>
+
+        <img style="width: 100%;" src="gamechanger-qr.svg" alt="Gamechanger SVG" id="qrcode-image">
 
         <div class="linkRow m-3">
           <a id="dappLink" target="_blank">GC dApp link</a>
@@ -87,17 +88,10 @@ VAT: 20,24 ADA" id="txInfo"></textarea>
           </div>
 
         </form>
-
       </div>
-
     </div>
-
   </div>
-
   </div>
-
   <script src="index.js"></script>
-
 </body>
-
 </html>
