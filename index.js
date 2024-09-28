@@ -107,7 +107,7 @@ async function main() {
         }
 
         gcscript.returnURLPattern = window.location.origin + window.location.pathname;
-        
+
         const actionUrl = await gc.encode.url({
             input: JSON.stringify(gcscript),
             apiVersion: '2',
@@ -116,13 +116,22 @@ async function main() {
 
         console.log(actionUrl)
 
+        let none_style = `{
+            "logo": "",
+            "title": "",
+            "subTitle": "",
+            "colorDark": "#000000",
+            "colorLight": "#ffffff",
+            "quietZone": 0        
+            }`
+
         const qr = await gc.encode.qr({
             input: JSON.stringify(gcscript),
             apiVersion: '2',
             network: network_type,
             qrResultType: 'png',
+            styles: none_style,
             template: 'printable'
-            // outputFile: 'myqr.svg'
         })
 
         console.log(qr);
